@@ -88,7 +88,7 @@ class YahooFinanceExchangeRateProvider implements ExchangeRateProviderInterface
                 $response = $this->httpClient->get(sprintf('http://download.finance.yahoo.com/d/quotes.csv?e=.csv&f=sl1&s=%s%s=X',
                   $sourceCurrencyCode, $destinationCurrencyCode));
                 $exchangeRate = $this->parseResponse($response->getBody());
-                return $exchangeRate ? new ExchangeRate(time(),
+                return $exchangeRate ? ExchangeRate::create(time(),
                   $sourceCurrencyCode, $destinationCurrencyCode,
                   $exchangeRate) : null;
             } catch (RequestException $e) {

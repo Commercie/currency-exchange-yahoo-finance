@@ -92,8 +92,10 @@ class YahooFinanceExchangeRateProvider implements ExchangeRateProviderInterface
                   $sourceCurrencyCode, $destinationCurrencyCode,
                   $exchangeRate) : null;
             } catch (RequestException $e) {
-                $this->logger->error(sprintf('The request to the Yahoo! Finance server failed. Reason: %s.',
-                  $e->getMessage()));
+                if ($this->logger) {
+                    $this->logger->error(sprintf('The request to the Yahoo! Finance server failed. Reason: %s.',
+                      $e->getMessage()));
+                }
             }
         }
         return null;

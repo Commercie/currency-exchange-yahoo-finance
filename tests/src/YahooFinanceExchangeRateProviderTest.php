@@ -7,6 +7,9 @@
 namespace BartFeenstra\Tests\CurrencyExchangeYahooFinance;
 
 use BartFeenstra\CurrencyExchangeYahooFinance\YahooFinanceExchangeRateProvider;
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @coversDefaultClass \BartFeenstra\CurrencyExchangeYahooFinance\YahooFinanceExchangeRateProvider
@@ -17,9 +20,16 @@ class YahooFinanceExchangeRateProviderTest extends \PHPUnit_Framework_TestCase
     /**
      * The HTTP client.
      *
-     * @var \GuzzleHttp\ClientInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var \GuzzleHttp\Client|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $httpClient;
+
+    /**
+     * The mock HTTP client handler.
+     *
+     * @var \GuzzleHttp\Handler\MockHandler
+     */
+    protected $httpClientHandler;
 
     /**
      * The logger.
@@ -37,7 +47,11 @@ class YahooFinanceExchangeRateProviderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->httpClient = $this->getMock('\GuzzleHttp\ClientInterface');
+        $this->httpClientHandler = new MockHandler();
+
+        $this->httpClient = new Client([
+            'handler' => $this->httpClientHandler,
+        ]);
 
         $this->logger = $this->getMock('\Psr\Log\LoggerInterface');
 
@@ -96,14 +110,12 @@ class YahooFinanceExchangeRateProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadWithInvalidResponse($responseBody)
     {
-        $httpResponse = $this->getMock('\GuzzleHttp\Message\ResponseInterface');
+        $httpResponse = $this->getMock(ResponseInterface::class);
         $httpResponse->expects($this->atLeastOnce())
           ->method('getBody')
           ->willReturn($responseBody);
 
-        $this->httpClient->expects($this->once())
-          ->method('get')
-          ->willReturn($httpResponse);
+        $this->httpClientHandler->append($httpResponse);
 
         $this->assertNull($this->sut->load('EUR', 'UAH'));
     }
@@ -135,9 +147,7 @@ class YahooFinanceExchangeRateProviderTest extends \PHPUnit_Framework_TestCase
           ->disableOriginalConstructor()
           ->getMock();
 
-        $this->httpClient->expects($this->once())
-          ->method('get')
-          ->willThrowException($requestException);
+        $this->httpClientHandler->append($requestException);
 
         $this->assertNull($this->sut->load('EUR', 'UAH'));
     }
@@ -152,14 +162,12 @@ class YahooFinanceExchangeRateProviderTest extends \PHPUnit_Framework_TestCase
     {
         $expectedExchangeRate = sprintf('%s.%s', mt_rand(), mt_rand());
 
-        $httpResponse = $this->getMock('\GuzzleHttp\Message\ResponseInterface');
+        $httpResponse = $this->getMock(ResponseInterface::class);
         $httpResponse->expects($this->atLeastOnce())
           ->method('getBody')
           ->willReturn(sprintf('"EURUSP=X",%s', $expectedExchangeRate));
 
-        $this->httpClient->expects($this->once())
-          ->method('get')
-          ->willReturn($httpResponse);
+        $this->httpClientHandler->append($httpResponse);
 
         $exchangeRate = $this->sut->load('EUR', 'UAH');
 

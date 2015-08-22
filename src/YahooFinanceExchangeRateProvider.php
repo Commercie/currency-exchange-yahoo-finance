@@ -9,7 +9,7 @@ namespace BartFeenstra\CurrencyExchangeYahooFinance;
 
 use BartFeenstra\CurrencyExchange\ExchangeRate;
 use BartFeenstra\CurrencyExchange\ExchangeRateProviderInterface;
-use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Log\LoggerInterface;
 
@@ -22,7 +22,7 @@ class YahooFinanceExchangeRateProvider implements ExchangeRateProviderInterface
     /**
      * The HTTP client.
      *
-     * @var \GuzzleHttp\ClientInterface
+     * @var \GuzzleHttp\Client
      */
     protected $httpClient;
 
@@ -36,13 +36,13 @@ class YahooFinanceExchangeRateProvider implements ExchangeRateProviderInterface
     /**
      * Constructs a new instance.
      *
-     * @param \GuzzleHttp\ClientInterface $httpClient
+     * @param \GuzzleHttp\Client $httpClient
      *   The HTTP client.
      * @param \Psr\Log\LoggerInterface|null
      *   The logger or NULL.
      */
     public function __construct(
-      ClientInterface $httpClient,
+      Client $httpClient,
       LoggerInterface $logger = null
     ) {
         $this->httpClient = $httpClient;

@@ -25,7 +25,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Commercie\\Tests\\CurrencyExchangeYahooFinance\\": "tests/src"
+      "Commercie\\Tests\\CurrencyExchangeYahooFinance\\": "tests"
     }
   }
 }

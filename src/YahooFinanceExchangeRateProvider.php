@@ -2,13 +2,13 @@
 
 /**
  * @file
- * Contains \BartFeenstra\CurrencyExchangeYahooFinance\YahooFinanceExchangeRateProvider.
+ * Contains \Commercie\CurrencyExchangeYahooFinance\YahooFinanceExchangeRateProvider.
  */
 
-namespace BartFeenstra\CurrencyExchangeYahooFinance;
+namespace Commercie\CurrencyExchangeYahooFinance;
 
-use BartFeenstra\CurrencyExchange\ExchangeRate;
-use BartFeenstra\CurrencyExchange\ExchangeRateProviderInterface;
+use Commercie\CurrencyExchange\ExchangeRate;
+use Commercie\CurrencyExchange\ExchangeRateProviderInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Log\LoggerInterface;

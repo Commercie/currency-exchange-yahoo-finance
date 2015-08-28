@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @file Contains \BartFeenstra\Tests\CurrencyExchange\AbstractStackedExchangeRateProviderTest.
+ * @file Contains \Commercie\Tests\CurrencyExchange\AbstractStackedExchangeRateProviderTest.
  */
 
-namespace BartFeenstra\Tests\CurrencyExchangeYahooFinance;
+namespace Commercie\Tests\CurrencyExchangeYahooFinance;
 
-use BartFeenstra\CurrencyExchangeYahooFinance\YahooFinanceExchangeRateProvider;
+use Commercie\CurrencyExchangeYahooFinance\YahooFinanceExchangeRateProvider;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * @coversDefaultClass \BartFeenstra\CurrencyExchangeYahooFinance\YahooFinanceExchangeRateProvider
+ * @coversDefaultClass \Commercie\CurrencyExchangeYahooFinance\YahooFinanceExchangeRateProvider
  */
 class YahooFinanceExchangeRateProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -41,7 +41,7 @@ class YahooFinanceExchangeRateProviderTest extends \PHPUnit_Framework_TestCase
     /**
      * The class under test.
      *
-     * @var \BartFeenstra\CurrencyExchangeYahooFinance\YahooFinanceExchangeRateProvider
+     * @var \Commercie\CurrencyExchangeYahooFinance\YahooFinanceExchangeRateProvider
      */
     protected $sut;
 
@@ -171,7 +171,7 @@ class YahooFinanceExchangeRateProviderTest extends \PHPUnit_Framework_TestCase
 
         $exchangeRate = $this->sut->load('EUR', 'UAH');
 
-        $this->assertInstanceOf('\BartFeenstra\CurrencyExchange\ExchangeRateInterface',
+        $this->assertInstanceOf('\Commercie\CurrencyExchange\ExchangeRateInterface',
           $exchangeRate);
         $this->assertSame($expectedExchangeRate, $exchangeRate->getRate());
     }

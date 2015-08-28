@@ -1,5 +1,5 @@
 {
-  "name": "bartfeenstra/currency-exchange-yahoo-finance",
+  "name": "commercie/currency-exchange-yahoo-finance",
   "description": "Retrieves currency exchange rates from Yahoo! Finance.",
   "license": "MIT",
   "authors": [
@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "bartfeenstra/currency-exchange": "0.1.*",
+    "commercie/currency-exchange": "0.4.*",
     "ext-bcmath": "*",
     "guzzlehttp/guzzle": "~6.0",
     "php": "~5.5 || ~7.0",
@@ -20,12 +20,12 @@
   },
   "autoload": {
     "psr-4": {
-      "BartFeenstra\\CurrencyExchangeYahooFinance\\": "src"
+      "Commercie\\CurrencyExchangeYahooFinance\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "BartFeenstra\\Tests\\CurrencyExchangeYahooFinance\\": "tests/src"
+      "Commercie\\Tests\\CurrencyExchangeYahooFinance\\": "tests/src"
     }
   }
 }

@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "commercie/currency-exchange": "0.4.*",
+    "commercie/currency-exchange": "~1.0",
     "ext-bcmath": "*",
     "guzzlehttp/guzzle": "~6.0",
     "php": "~5.5 || ~7.0",
